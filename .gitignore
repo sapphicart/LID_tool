@@ -1,2 +1,4 @@
 *.pyc
 *Zone.Identifier
+__pycache__/
+mallet-2.0.8/

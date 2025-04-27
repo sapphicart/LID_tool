@@ -12,8 +12,8 @@ import time
 import codecs
 import pickle
 
-from utils import extractFeatures as ef
-from utils import generateLanguageTags as genLangTag
+from LID_tool.utils import extractFeatures as ef
+from LID_tool.utils import generateLanguageTags as genLangTag
 from collections import OrderedDict
 from configparser import ConfigParser
 
@@ -54,13 +54,13 @@ def readConfig():
 
     # setup paths for classifier, tmp folder, dictionaries and mallet
     CLASSIFIER_PATH = config_paths["CLASSIFIER_PATH"] if config_paths["CLASSIFIER_PATH"] else os.path.join(
-        os.getcwd(), 'classifiers', 'HiEn.classifier')
+        os.getcwd(), 'LID_tool', 'classifiers', 'HiEn.classifier')
     TMP_FILE_PATH = config_paths["TMP_FILE_PATH"] if config_paths["TMP_FILE_PATH"] else os.path.join(
-        os.getcwd(), 'tmp', '')
+        os.getcwd(), 'LID_tool', 'tmp', '')
     DICT_PATH = config_paths["DICT_PATH"] if config_paths["DICT_PATH"] else os.path.join(
-        os.getcwd(), 'dictionaries', '')
+        os.getcwd(), 'LID_tool', 'dictionaries', '')
     MALLET_PATH = config_paths["MALLET_PATH"] if config_paths["MALLET_PATH"] else os.path.join(
-        os.getcwd(), 'mallet-2.0.8', 'bin', 'mallet')
+        os.getcwd(), 'LID_tool', 'mallet-2.0.8', 'bin', 'mallet')
 
     # initialize probability values for the correct and incorrect language
     dict_prob_yes = config_probs["dict_prob_yes"] if config_probs["dict_prob_yes"] else 0.999999999
@@ -125,7 +125,7 @@ def createDicts():
                     language_1_dicts[sub_dict][w.strip().lower()] = ''
 
             language_1_words.extend(list(language_1_dicts[sub_dict].keys()))
-    print(lang1, 'dictionary created')
+#    print(lang1, 'dictionary created')
 
     # create language_2 dictionary
     for sub_dict in language_2_dicts:
@@ -137,7 +137,7 @@ def createDicts():
                     language_2_dicts[sub_dict][w.strip().lower()] = ''
 
             language_2_words.extend(list(language_2_dicts[sub_dict].keys()))
-    print(lang2, 'dictionary created')
+#    print(lang2, 'dictionary created')
 
     # populate the combined word list
     combined_dicts.extend(language_1_words)
@@ -376,7 +376,7 @@ def callMallet(inputText, classifier):
     # memoize the probabilities of words already classified
     memoizeWord(mallet_output)
 
-    print("time for mallet classification", t_total, file=sys.stderr)
+#    print("time for mallet classification", t_total, file=sys.stderr)
     return blurb, mallet_output, blurb_dict
 
 
