@@ -75,7 +75,7 @@ def readConfig():
         memoize_dict = {}
 
     # by default verbose is ON
-    verbose = int(config_gen["verbose"]) if config_gen["verbose"] else 1
+    verbose = int(config_gen["verbose"]) if config_gen["verbose"] else 0
 
     # get language names by default language 1 is HINDI and language 2 is ENGLISH
     lang1 = config_gen["language_1"].upper(
@@ -556,7 +556,7 @@ if __name__ == "__main__":
     """
 
     blurb = sys.argv[1]
-    print(blurb)
+    #print(blurb)
     print(sys.argv)
     classifier = CLASSIFIER_PATH
     mode = "file"
